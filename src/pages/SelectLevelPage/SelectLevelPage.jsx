@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
 import { useState } from "react";
+import { useEasyMode } from "../../hooks/useEasyMode";
 
 export function SelectLevelPage() {
   const [selectedLevel, setSelectedLevel] = useState(null);
   const navigate = useNavigate();
+  const { isEasyMode, setIsEasyMode } = useEasyMode();
+
+  const handleEasyModeChange = event => {
+    setIsEasyMode(event.target.checked);
+  };
 
   const handleCheckboxChange = level => {
     setSelectedLevel(level);
@@ -32,6 +38,10 @@ export function SelectLevelPage() {
             </li>
           ))}
         </ul>
+        <label className={styles.checkboxMode}>
+          <input type="checkbox" onChange={handleEasyModeChange} checked={isEasyMode} />
+          <span>Легкий режим (3 попытки)</span>
+        </label>
         <button className={styles.buttonStart} onClick={handleStartClick}>
           Старт
         </button>

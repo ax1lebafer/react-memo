@@ -33,7 +33,7 @@
   flex-direction: row;
   gap: 26px;
   margin-top: 48px;
-  margin-bottom: 67px;
+  margin-bottom: 30px;
 }
 
 .level {
@@ -111,8 +111,23 @@
   text-decoration: none;
 }
 
-.checkboxButton input[type=checkbox]:checked + span {
-	background: #ffe0a6;
+.checkboxButton input[type=checkbox]:checked+span {
+  background: #ffe0a6;
+}
+
+.checkboxMode {
+  font-family: StratosSkyeng;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.checkboxMode input[type=checkbox] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
 }
 
 .buttonStart {
