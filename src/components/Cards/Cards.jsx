@@ -36,6 +36,16 @@ function getTimerValue(startDate, endDate) {
   };
 }
 
+function closeUnmatchedCards(setCards, openCardsWithoutPair) {
+  setTimeout(() => {
+    setCards(currentCards =>
+      currentCards.map(card =>
+        openCardsWithoutPair.some(openCard => openCard.id === card.id) ? { ...card, open: false } : card,
+      ),
+    );
+  }, 1000);
+}
+
 /**
  * Основной компонент игры, внутри него находится вся игровая механика и логика.
  * pairsCount - сколько пар будет в игре
@@ -138,9 +148,9 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
       } else {
         // Функция закрытия карточек
         setLives(prevState => prevState - 1);
+        closeUnmatchedCards(setCards, openCardsWithoutPair);
       }
     }
-
     // ... игра продолжается
   };
 
