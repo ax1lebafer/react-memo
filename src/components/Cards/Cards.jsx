@@ -6,6 +6,7 @@ import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import { useEasyMode } from "../../hooks/useEasyMode";
+import { DEFAULT_MODE_LIVES, EASY_MODE_LIVES } from "../../const";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -53,7 +54,7 @@ function closeUnmatchedCards(setCards, openCardsWithoutPair) {
  */
 export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   const { isEasyMode } = useEasyMode();
-  const [lives, setLives] = useState(isEasyMode ? 3 : 1);
+  const [lives, setLives] = useState(isEasyMode ? EASY_MODE_LIVES : DEFAULT_MODE_LIVES);
 
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
@@ -87,7 +88,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     setGameEndDate(null);
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
-    setLives(isEasyMode ? 3 : 1);
+    setLives(isEasyMode ? EASY_MODE_LIVES : DEFAULT_MODE_LIVES);
   }
 
   /**
