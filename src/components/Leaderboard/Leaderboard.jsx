@@ -12,7 +12,12 @@ export function Leaderboard() {
 
   useEffect(() => {
     getLeaders().then(response => {
-      const sortedLeaders = response.leaders.sort((a, b) => a.time - b.time);
+      const sortedLeaders = response.leaders
+        .map(leader => ({
+          ...leader,
+          name: leader.name.trim() === "" ? "Пользователь" : leader.name,
+        }))
+        .sort((a, b) => a.time - b.time);
       setLeaders(sortedLeaders);
     });
   }, [setLeaders]);
