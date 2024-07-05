@@ -1,28 +1,43 @@
+import { Link } from "react-router-dom";
 import { Button } from "../Button/Button";
+import { LeaderboardRow } from "../LeaderboardRow/LeaderboardRow";
 import styles from "./Leaderboard.module.css";
+import cn from "classnames";
+import { useEffect } from "react";
+import { getLeaders } from "../../api";
+import { useLeaders } from "../../hooks/useLeaders";
 
 export function Leaderboard() {
+  const { leaders, setLeaders } = useLeaders();
+
+  useEffect(() => {
+    getLeaders().then(response => {
+      const sortedLeaders = response.leaders.sort((a, b) => a.time - b.time);
+      setLeaders(sortedLeaders);
+    });
+  }, [setLeaders]);
+
+  console.log(leaders);
+
   return (
     <div className={styles.leaderboard}>
       <header className={styles.header}>
         <p className={styles.headerTitle}>Лидерборд</p>
-        <Button>Начать игру</Button>
+        <Link to={"/"}>
+          <Button>Начать игру</Button>
+        </Link>
       </header>
       <section className={styles.section}>
-        <article className={styles.sectionTop}>
+        <div className={styles.sectionTop}>
           <div>
-            <p className={styles.sectionText}>Позиция</p>
-            <p className={styles.sectionText}>Пользователь</p>
+            <p className={cn(styles.sectionText, styles.textPosition)}>Позиция</p>
+            <p className={cn(styles.sectionText, styles.textUser)}>Пользователь</p>
           </div>
-          <p className={styles.sectionText}>Время</p>
-        </article>
-        <article className={styles.sectionTop}>
-          <div>
-            <p className={styles.sectionText}>#1</p>
-            <p className={styles.sectionText}>ab98awj_918mlz1lavfh_ru</p>
-          </div>
-          <p className={styles.sectionText}>01:30</p>
-        </article>
+          <p className={cn(styles.sectionText, styles.textTime)}>Время</p>
+        </div>
+        {leaders.map((leader, index) => (
+          <LeaderboardRow position={`# ${index + 1}`} userName={leader.name} time={leader.time} key={leader.id} />
+        ))}
       </section>
     </div>
   );

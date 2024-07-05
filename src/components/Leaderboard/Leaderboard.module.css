@@ -37,7 +37,7 @@
 .sectionTop div {
     display: flex;
     justify-content: space-between;
-    width: 400px;
+    gap: 66px;
 }
 
 .sectionText {
@@ -45,4 +45,16 @@
     font-family: StratosSkyeng;
     font-size: 24px;
     font-weight: 400;
+}
+
+.textPosition {
+    width: 178px;
+}
+
+.textUser {
+    width: 324px;
+}
+
+.textTime {
+    width: 102px;
 }
