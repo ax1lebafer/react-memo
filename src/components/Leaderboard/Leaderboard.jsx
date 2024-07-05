@@ -3,26 +3,10 @@ import { Button } from "../Button/Button";
 import { LeaderboardRow } from "../LeaderboardRow/LeaderboardRow";
 import styles from "./Leaderboard.module.css";
 import cn from "classnames";
-import { useEffect } from "react";
-import { getLeaders } from "../../api";
 import { useLeaders } from "../../hooks/useLeaders";
 
 export function Leaderboard() {
-  const { leaders, setLeaders } = useLeaders();
-
-  useEffect(() => {
-    getLeaders().then(response => {
-      const sortedLeaders = response.leaders
-        .map(leader => ({
-          ...leader,
-          name: leader.name.trim() === "" ? "Пользователь" : leader.name,
-        }))
-        .sort((a, b) => a.time - b.time);
-      setLeaders(sortedLeaders);
-    });
-  }, [setLeaders]);
-
-  console.log(leaders);
+  const { leaders } = useLeaders();
 
   return (
     <div className={styles.leaderboard}>
