@@ -58,3 +58,10 @@
 .textTime {
     width: 102px;
 }
+
+.loader {
+    font-size: 24px;
+    color: #FFFFFF;
+    font-family: StratosSkyeng;
+    text-align: center;
+}
