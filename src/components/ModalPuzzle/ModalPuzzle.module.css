@@ -1,0 +1,48 @@
+.fff {
+    position: absolute;
+    width: 174px;
+    top: -100px;
+    left: 35px;
+}
+
+.popupContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.popup {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 8px;
+}
+
+.popupContent {
+    display: flex;
+    align-items: center;
+    background-color: #C2F5FF;
+    border-radius: 8px;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.popupText {
+    font-size: 18px;
+    color: #002B6E;
+    text-align: center;
+    font-family: StratosSkyeng;
+}
+
+.popupContent::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-right: 25px solid transparent;
+    border-top: 20px solid #C2F5FF;
+    border-bottom: 5px solid transparent;
+}

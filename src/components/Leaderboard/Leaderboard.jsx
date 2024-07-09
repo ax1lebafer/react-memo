@@ -30,6 +30,8 @@ export function Leaderboard() {
       });
   }, [setLeaders]);
 
+  console.log(leaders);
+
   return (
     <div className={styles.leaderboard}>
       <header className={styles.header}>
@@ -40,10 +42,9 @@ export function Leaderboard() {
       </header>
       <section className={styles.section}>
         <div className={styles.sectionTop}>
-          <div>
-            <p className={cn(styles.sectionText, styles.textPosition)}>Позиция</p>
-            <p className={cn(styles.sectionText, styles.textUser)}>Пользователь</p>
-          </div>
+          <p className={cn(styles.sectionText, styles.textPosition)}>Позиция</p>
+          <p className={cn(styles.sectionText, styles.textUser)}>Пользователь</p>
+          <p className={cn(styles.sectionText, styles.textAchievement)}>Достижения</p>
           <p className={cn(styles.sectionText, styles.textTime)}>Время</p>
         </div>
         {isLoading && <span className={styles.loader}>Загрузка...</span>}
