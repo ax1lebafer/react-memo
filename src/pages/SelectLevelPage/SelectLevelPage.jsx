@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
 import { useState } from "react";
 import { useEasyMode } from "../../hooks/useEasyMode";
+// import { useLeaders } from "../../hooks/useLeaders";
+// import { getLeaders } from "../../api";
 
 export function SelectLevelPage() {
   const [selectedLevel, setSelectedLevel] = useState(null);
@@ -45,6 +47,9 @@ export function SelectLevelPage() {
         <button className={styles.buttonStart} onClick={handleStartClick}>
           Старт
         </button>
+        <Link className={styles.leaderboardLink} to="/leaderboard">
+          Перейти к лидерборду
+        </Link>
       </div>
     </div>
   );
