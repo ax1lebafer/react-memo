@@ -11,7 +11,7 @@ function formatSeconds(seconds) {
   return date;
 }
 
-export function LeaderboardRow({ position, userName, achievement, time }) {
+export function LeaderboardRow({ position, userName, achievements, time }) {
   const [isPopupPuzzleVisible, setIsPopupPuzzleVisible] = useState(false);
   const [isPopupBallVisible, setIsPopupBallVisible] = useState(false);
 
@@ -39,13 +39,13 @@ export function LeaderboardRow({ position, userName, achievement, time }) {
       <p className={cn(styles.sectionText, styles.textUser)}>{userName}</p>
       <div className={styles.sectionIcons}>
         <img
-          src="./puzzle_empty.svg"
+          src={`${achievements.includes(1) ? "./puzzle.svg" : "./puzzle_empty.svg"}`}
           alt="puzzle"
           onMouseEnter={handleBallMouseEnter}
           onMouseLeave={handleBallMouseLeave}
         />
         <img
-          src="./magic_ball_empty.svg"
+          src={`${achievements.includes(2) ? "./magic_ball.svg" : "./magic_ball_empty.svg"}`}
           alt="ball"
           onMouseEnter={handlePuzzleMouseEnter}
           onMouseLeave={handlePuzzleMouseLeave}

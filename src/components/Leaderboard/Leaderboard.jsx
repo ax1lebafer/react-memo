@@ -51,7 +51,13 @@ export function Leaderboard() {
         {!isLoading && (
           <>
             {leaders.map((leader, index) => (
-              <LeaderboardRow position={`# ${index + 1}`} userName={leader.name} time={leader.time} key={leader.id} />
+              <LeaderboardRow
+                position={`# ${index + 1}`}
+                userName={leader.name}
+                time={leader.time}
+                key={leader.id}
+                achievements={leader.achievements}
+              />
             ))}
           </>
         )}
