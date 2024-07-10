@@ -3,6 +3,7 @@ import cn from "classnames";
 import { format } from "date-fns";
 import { ModalPuzzle } from "../ModalPuzzle/ModalPuzzle";
 import { useState } from "react";
+import { ModalBall } from "../ModalBall/ModalBall";
 
 function formatSeconds(seconds) {
   const date = new Date(0);
@@ -11,16 +12,25 @@ function formatSeconds(seconds) {
 }
 
 export function LeaderboardRow({ position, userName, achievement, time }) {
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isPopupPuzzleVisible, setIsPopupPuzzleVisible] = useState(false);
+  const [isPopupBallVisible, setIsPopupBallVisible] = useState(false);
 
   const formattedTime = format(formatSeconds(time), "mm:ss");
 
-  const handleMouseEnter = () => {
-    setIsPopupVisible(true);
+  const handleBallMouseEnter = () => {
+    setIsPopupBallVisible(true);
   };
 
-  const handleMouseLeave = () => {
-    setIsPopupVisible(false);
+  const handleBallMouseLeave = () => {
+    setIsPopupBallVisible(false);
+  };
+
+  const handlePuzzleMouseEnter = () => {
+    setIsPopupPuzzleVisible(true);
+  };
+
+  const handlePuzzleMouseLeave = () => {
+    setIsPopupPuzzleVisible(false);
   };
 
   return (
@@ -28,9 +38,20 @@ export function LeaderboardRow({ position, userName, achievement, time }) {
       <p className={cn(styles.sectionText, styles.textPosition)}>{position}</p>
       <p className={cn(styles.sectionText, styles.textUser)}>{userName}</p>
       <div className={styles.sectionIcons}>
-        <img src="./puzzle_empty.svg" alt="puzzle" />
-        <img src="./magic_ball_empty.svg" alt="ball" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
-        {isPopupVisible && <ModalPuzzle />}
+        <img
+          src="./puzzle_empty.svg"
+          alt="puzzle"
+          onMouseEnter={handleBallMouseEnter}
+          onMouseLeave={handleBallMouseLeave}
+        />
+        <img
+          src="./magic_ball_empty.svg"
+          alt="ball"
+          onMouseEnter={handlePuzzleMouseEnter}
+          onMouseLeave={handlePuzzleMouseLeave}
+        />
+        {isPopupBallVisible && <ModalBall />}
+        {isPopupPuzzleVisible && <ModalPuzzle />}
       </div>
       <p className={cn(styles.sectionText, styles.textTime)}>{formattedTime}</p>
     </div>
