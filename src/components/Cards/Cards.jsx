@@ -55,6 +55,8 @@ function closeUnmatchedCards(setCards, openCardsWithoutPair) {
 export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   const { isEasyMode } = useEasyMode();
   const [lives, setLives] = useState(isEasyMode ? EASY_MODE_LIVES : DEFAULT_MODE_LIVES);
+  const [perkUses, setPerkUses] = useState(0);
+  const [counterPerk, setCounterPerk] = useState(2);
 
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
@@ -89,6 +91,32 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
     setLives(isEasyMode ? EASY_MODE_LIVES : DEFAULT_MODE_LIVES);
+    setPerkUses(0);
+    setCounterPerk(2);
+  }
+
+  function usePerk() {
+    if (perkUses >= 2) return;
+    setPerkUses(prev => prev + 1);
+    setCounterPerk(prev => prev - 1);
+
+    const closedCards = cards.filter(card => !card.open);
+    if (closedCards.length < 2) return;
+
+    const randomCardIndex = Math.floor(Math.random() * closedCards.length);
+    const randomCard = closedCards[randomCardIndex];
+
+    const matchingCard = cards.find(
+      card => card.suit === randomCard.suit && card.rank === randomCard.rank && card.id !== randomCard.id,
+    );
+
+    if (matchingCard) {
+      setCards(currentCards =>
+        currentCards.map(card =>
+          card.id === randomCard.id || card.id === matchingCard.id ? { ...card, open: true } : card,
+        ),
+      );
+    }
   }
 
   /**
@@ -222,7 +250,15 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
             </>
           )}
         </div>
-        {status === STATUS_IN_PROGRESS ? <Button onClick={resetGame}>Начать заново</Button> : null}
+        {status === STATUS_IN_PROGRESS ? (
+          <>
+            <div className={styles.perks}>
+              <img className={styles.cardPerk} src="../card_perk.svg" alt="eye_perk" onClick={usePerk} />
+              <div className={styles.counterPerk}>{counterPerk}</div>
+            </div>
+            <Button onClick={resetGame}>Начать заново</Button>
+          </>
+        ) : null}
       </div>
 
       <div className={styles.cards}>

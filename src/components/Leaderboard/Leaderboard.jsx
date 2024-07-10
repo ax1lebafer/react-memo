@@ -30,8 +30,6 @@ export function Leaderboard() {
       });
   }, [setLeaders]);
 
-  console.log(leaders);
-
   return (
     <div className={styles.leaderboard}>
       <header className={styles.header}>
