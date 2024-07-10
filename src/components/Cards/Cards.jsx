@@ -57,6 +57,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   const [lives, setLives] = useState(isEasyMode ? EASY_MODE_LIVES : DEFAULT_MODE_LIVES);
   const [perkUses, setPerkUses] = useState(0);
   const [counterPerk, setCounterPerk] = useState(2);
+  const [achievements, setAchievements] = useState(isEasyMode ? [1] : []);
 
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
@@ -99,6 +100,10 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     if (perkUses >= 2) return;
     setPerkUses(prev => prev + 1);
     setCounterPerk(prev => prev - 1);
+
+    if (perkUses === 0) {
+      setAchievements([...achievements, 2]);
+    }
 
     const closedCards = cards.filter(card => !card.open);
     if (closedCards.length < 2) return;
@@ -283,6 +288,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
             gameDurationSeconds={timer.seconds}
             gameDurationMinutes={timer.minutes}
             onClick={resetGame}
+            achievements={achievements}
           />
         </div>
       ) : null}

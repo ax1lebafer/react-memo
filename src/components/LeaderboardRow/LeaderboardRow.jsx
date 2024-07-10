@@ -39,13 +39,13 @@ export function LeaderboardRow({ position, userName, achievements, time }) {
       <p className={cn(styles.sectionText, styles.textUser)}>{userName}</p>
       <div className={styles.sectionIcons}>
         <img
-          src={`${achievements.includes(1) ? "./puzzle.svg" : "./puzzle_empty.svg"}`}
+          src={`${achievements.includes(1) ? "./puzzle_empty.svg" : "./puzzle.svg"}`}
           alt="puzzle"
           onMouseEnter={handleBallMouseEnter}
           onMouseLeave={handleBallMouseLeave}
         />
         <img
-          src={`${achievements.includes(2) ? "./magic_ball.svg" : "./magic_ball_empty.svg"}`}
+          src={`${achievements.includes(2) ? "./magic_ball_empty.svg" : "./magic_ball.svg"}`}
           alt="ball"
           onMouseEnter={handlePuzzleMouseEnter}
           onMouseLeave={handlePuzzleMouseLeave}
